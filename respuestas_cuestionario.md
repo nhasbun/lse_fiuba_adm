@@ -35,3 +35,7 @@ El mapa de memoria de los Cortex M presenta secciones bien definidas para el pro
 
 Estas direcciones quedan con un *offset* amigable que permite encontrarlas rápidamente. Por ejemplo, la memoria de programa inicia en la dirección **0x0000_0000** e inmediatamente luego de esta sección inicia la memoria RAM en la dirección **0x2000_0000** (esto corresponde a un direccionamiento disponible de 500MB para la memoria de programa).
 
+18. **¿Qué funciones cumple la unidad de protección de memoria (MPU)?**
+
+Permite definir y controlar el acceso a regiones de memoria asignadas a distintos programas. De este modo un programa no puede afectar el funcionamiento del resto del sistema, ya sea a propósito o por resultado de un *bug*.
+
