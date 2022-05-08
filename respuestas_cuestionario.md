@@ -1,7 +1,7 @@
 # Preguntas Orientadoras
 
 1. **Describa brevemente los diferentes perfiles de familias de
-microprocesadores/microcontroladores de ARM. Explique alguna de sus diferencias
+   microprocesadores/microcontroladores de ARM. Explique alguna de sus diferencias
    características**
 
 ARM entrega soluciones en base a 3 perfiles de uso principales. El primero es el perfil A, que busca entregar procesadores para uso en sistemas operativos de propósito general con alta capacidad de procesamiento. Esto comprende máquinas Linux, Teléfonos Android, Linux Embebido y otros usos.
@@ -38,4 +38,12 @@ Estas direcciones quedan con un *offset* amigable que permite encontrarlas rápi
 18. **¿Qué funciones cumple la unidad de protección de memoria (MPU)?**
 
 Permite definir y controlar el acceso a regiones de memoria asignadas a distintos programas. De este modo un programa no puede afectar el funcionamiento del resto del sistema, ya sea a propósito o por resultado de un *bug*.
+
+17. **¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?**
+
+Es una interrupción constante generada por un timer en el procesador usualmente cada 1ms. Esto permite llevar medida del tiempo transcurrido pero también permite asociar tareas a esta interrupción de **systick**.
+
+Con esto se construyen sistemas operativos embebidos que permiten gestionar cambios entre una y otra tarea en ejecución. Cada vez que ocurre esta interrupción se chequea si la tarea en ejecución debe continuar o se debe cambiar e iniciar otra tarea.
+
+Esta unidad de **tick** es la base de los sistemas operativos embebidos. De este modo mientras la arquitectura del procesador soporte estas interrupciones, el sistema operativo embebido debería poder ser portado.
 
