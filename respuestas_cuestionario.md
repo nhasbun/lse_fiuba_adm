@@ -44,6 +44,15 @@ El mapa de memoria de los Cortex M presenta secciones bien definidas para el pro
 
 Estas direcciones quedan con un *offset* amigable que permite encontrarlas rápidamente. Por ejemplo, la memoria de programa inicia en la dirección **0x0000_0000** e inmediatamente luego de esta sección inicia la memoria RAM en la dirección **0x2000_0000** (esto corresponde a un direccionamiento disponible de 500MB para la memoria de programa).
 
+7. **¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo**
+
+Es un modelo donde todos los registros (o la mayoría) pueden ser utilizados de forma indistinta por las instrucciones. 
+Las instrucciones no operan sobre registros específicos si no que existe un grupo de registros de propósito general en 
+el cuál todas las instrucciones pueden operar.
+
+Un ejemplo de esto se ve en los Cortex M3/M4 donde tenemos 13 registros (r0 - r12) de propósito general en donde pueden operar
+las instrucciones de AND, ADD, MOV, etc. sobre cualquier registro. Ejemplo: ADD r1, r2, r12 MOV r1, r0 AND r11, r10, r9. 
+
 18. **¿Qué funciones cumple la unidad de protección de memoria (MPU)?**
 
 Permite definir y controlar el acceso a regiones de memoria asignadas a distintos programas. De este modo un programa no puede afectar el funcionamiento del resto del sistema, ya sea a propósito o por resultado de un *bug*.
