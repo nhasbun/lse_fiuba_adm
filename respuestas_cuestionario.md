@@ -29,6 +29,15 @@ Cortex M4 es muy parecido a M3 presenta un set de instrucciones aún más amplio
 y co-procesadores más poderosos (co-procesador para procesamiento digital de 
 señales DSP y un co-procesador operaciones de punto flotante FPU).
 
+3. **¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura?**
+
+La arquitectura **load-store** hace referencia a la forma en la que trabajan las instrucciones de un procesador. 
+En este tipo de arquitecturas existen instrucciones específicas para extraer o cargar elementos desde la memoria RAM y
+todo el resto de operaciones se hacen entre registros.
+
+Las instrucciones que no poseen este tipo de arquitecturas son instrucciones que realizan operaciones entre un registro
+y un elemento en memoria. La arquitectura más conocida que ocupa este modelo es la arquitectura x86.
+
 4. **¿Cómo es el mapa de memoria de la familia?**
 
 El mapa de memoria de los Cortex M presenta secciones bien definidas para el programa, RAM, periféricos y resto del sistema dentro de todo el espacio de 4GB de memoria que les otorga las direcciones de 32bits.
