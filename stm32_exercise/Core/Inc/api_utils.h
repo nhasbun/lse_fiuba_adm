@@ -15,5 +15,9 @@
  */
 void zeros (uint32_t * vector, uint32_t longitud);
 
+/**
+ * Scalar multiplication of array (32 bits numbers)
+ */
+void productoEscalar32(uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longitud, uint32_t escalar);
 
 #endif /* INC_API_UTILS_H_ */
