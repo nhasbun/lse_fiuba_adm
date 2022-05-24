@@ -42,6 +42,9 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
 		res = *vectorIn * escalar;
 		if (res > max_number) res = max_number;
 		*vectorOut = (uint16_t) res;
+
+		vectorOut++;
+		vectorIn++;
 	}
 }
 
