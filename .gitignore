@@ -1,0 +1,8 @@
+# .gitignore templates from:
+# https://www.reddit.com/r/embedded/comments/scezb8/anyone_have_a_gitignore_template_for_stm32ide/
+# https://www.toptal.com/developers/gitignore/api/eclipse
+#
+.settings
+[Rr]elease
+[Dd]ebug
+*.launch
