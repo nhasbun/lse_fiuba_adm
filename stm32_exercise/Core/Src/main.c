@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "string.h"
+#include "api_utils.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -158,6 +159,21 @@ int main(void)
   PrivilegiosSVC ();
 
   const uint32_t Resultado = asm_sum (5, 3);
+
+  // Testing basic functionality of api_utils methods
+  uint32_t test_array_zeros[] = {1, 2, 3};
+  zeros(test_array_zeros, 3);
+
+  uint32_t test_array_32_in[] = {0xFF, 0x1111, 0xFFFFFFFA};
+  uint32_t test_array_32_out[3] = {0};
+  productoEscalar32(test_array_32_in, test_array_32_out, 3, 3);
+
+  uint16_t test_array_16_in[] = {0xFF, 0xFFA, 0xFFFA};
+  uint16_t test_array_16_out[3] = {0};
+  productoEscalar16(test_array_16_in, test_array_16_out, 3, 3);
+
+  productoEscalar12(test_array_16_in, test_array_16_out, 3, 3);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
