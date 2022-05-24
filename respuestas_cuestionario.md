@@ -12,8 +12,7 @@ El tercer perfil M está orientado al uso en dispositivos embebidos. Buscan entr
 
 ## Cortex M
 
-2. **Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y**
-   **M4**
+1. **Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4**
 
 Cortex M0 presenta una solución mínima de bajo costo para aplicaciones sencillas
 y que presenta un bajo consumo. Presentan una arquitectura de comunicación interna 
@@ -28,6 +27,20 @@ arquitectura interna de tipo Harvard la comunicación interna es más rápida.
 Cortex M4 es muy parecido a M3 presenta un set de instrucciones aún más amplio
 y co-procesadores más poderosos (co-procesador para procesamiento digital de 
 señales DSP y un co-procesador operaciones de punto flotante FPU).
+
+2. **¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código?**
+
+El set de instrucciones Thumb introdujo intrucciones de 16 bits a las instrucciones "tradicionales" ARM de 32 bits.
+Estas instrucciones se integran bajo una instrucción especial que indica al procesador el cambio al **modo Thumb** o
+al **modo ARM** según fuera requerido.
+
+Esto permite que los programas generados en binario se almacenen ocupando sólo 2 bytes en modo Thumb versus los 4 bytes
+necesarios para programas escritos en modo ARM haciendo un uso efectivo de la mitad de tamaño de programa requerido. De
+este modo el código binario generado queda con una mayor densidad produciendo los mismos resultados y ocupando menor
+espacio en memoria de programa.
+
+En la actualidad los procesadores Cortex funcionan bajo el modo Thumb-2 en donde conviven instrucciones de 16 bits y 
+32 bits sin necesidad de agregar una instrucción especial para cambio de modo.
 
 3. **¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura?**
 
