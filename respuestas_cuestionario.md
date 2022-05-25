@@ -66,9 +66,15 @@ el cuál todas las instrucciones pueden operar.
 Un ejemplo de esto se ve en los Cortex M3/M4 donde tenemos 13 registros (r0 - r12) de propósito general en donde pueden operar
 las instrucciones de AND, ADD, MOV, etc. sobre cualquier registro. Ejemplo: ADD r1, r2, r12 MOV r1, r0 AND r11, r10, r9. 
 
-18. **¿Qué funciones cumple la unidad de protección de memoria (MPU)?**
+14. **¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?**
 
-Permite definir y controlar el acceso a regiones de memoria asignadas a distintos programas. De este modo un programa no puede afectar el funcionamiento del resto del sistema, ya sea a propósito o por resultado de un *bug*.
+Es una capa de abstracción entregada por ARM a los fabricantes finales de los microcontroladores para su configuración,
+acceso a periféricos y acceso a software base como es el caso de los sistemas operativos de tiempo real.
+
+Permite acelerar el tiempo de salida al mercado para los fabricantes a la vez que permite la reusabilidad de código
+entre distintas versiones de microcontroladores. Un ejemplo de esto es el paquete de abstracción CMSIS-Core(M) que entrega
+una interfaz unificada para programar todos los microcontroladores de la gama Cortex-M (un paquete similar CMSIS-Core(A) 
+existe para los procesadores de la gama Cortex-A).
 
 17. **¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?**
 
@@ -77,4 +83,8 @@ Es una interrupción constante generada por un timer en el procesador usualmente
 Con esto se construyen sistemas operativos embebidos que permiten gestionar cambios entre una y otra tarea en ejecución. Cada vez que ocurre esta interrupción se chequea si la tarea en ejecución debe continuar o se debe cambiar e iniciar otra tarea.
 
 Esta unidad de **tick** es la base de los sistemas operativos embebidos. De este modo mientras la arquitectura del procesador soporte estas interrupciones, el sistema operativo embebido debería poder ser portado.
+
+18. **¿Qué funciones cumple la unidad de protección de memoria (MPU)?**
+
+Permite definir y controlar el acceso a regiones de memoria asignadas a distintos programas. De este modo un programa no puede afectar el funcionamiento del resto del sistema, ya sea a propósito o por resultado de un *bug*.
 
