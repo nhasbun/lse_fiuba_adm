@@ -64,7 +64,7 @@ Las instrucciones no operan sobre registros específicos si no que existe un gru
 el cuál todas las instrucciones pueden operar.
 
 Un ejemplo de esto se ve en los Cortex M3/M4 donde tenemos 13 registros (r0 - r12) de propósito general en donde pueden operar
-las instrucciones de AND, ADD, MOV, etc. sobre cualquier registro. Ejemplo: ADD r1, r2, r12 MOV r1, r0 AND r11, r10, r9. 
+las instrucciones de AND, ADD, MOV, etc. sobre cualquier registro. Ejemplo: ADD r1, r2, r12 MOV r1, r0 AND r11, r10, r9.
 
 14. **¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?**
 
@@ -88,3 +88,16 @@ Esta unidad de **tick** es la base de los sistemas operativos embebidos. De este
 
 Permite definir y controlar el acceso a regiones de memoria asignadas a distintos programas. De este modo un programa no puede afectar el funcionamiento del resto del sistema, ya sea a propósito o por resultado de un *bug*.
 
+## ISA
+
+3. **¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.**
+
+Estas instrucciones permiten establecer máximos y minimos para operaciones aritméticas. Tradicionalmente las operaciones
+aritméticas dada la limitación de bits para representar números pueden sufrir errores en su cálculo al traspasar valores
+máximos (_overflow_) o mínimos (_underflow_) dando la vuelta por el límite opuesto.
+
+Un ejemplo de esto es un simple suma para un número entero sin signo de 8 bits:
+* Tomando un valor máximo de 254 (representado por el número binario 1111_1110)
+* Sumando un valor 2: 
+   * De forma tradicional toma un valor de 0 (o en binario 0000_0000)
+   * Con aritmética saturada limitando su valor al máximo representable queda en 255.
