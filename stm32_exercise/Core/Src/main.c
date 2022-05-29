@@ -174,6 +174,12 @@ int main(void)
 
   productoEscalar12(test_array_16_in, test_array_16_out, 3, 3);
 
+  // Testing basic functionality of asm_func methods
+  test_array_zeros[0] = 1;
+  test_array_zeros[1] = 2;
+  test_array_zeros[2] = 3;
+  asm_zeros(test_array_zeros, 3);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

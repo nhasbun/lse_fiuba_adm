@@ -19,7 +19,7 @@ void productoEscalar32(uint32_t * vectorIn, uint32_t * vectorOut, uint32_t longi
 
 	for (uint32_t i = 0; i < longitud; i++) {
 		*vectorOut = *vectorIn * escalar;
-		vectorOut++;
+		vectorOut = vectorOut + 1;
 		vectorIn++;
 	}
 }
