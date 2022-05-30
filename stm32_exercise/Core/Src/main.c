@@ -168,7 +168,7 @@ int main(void)
   uint32_t test_array_32_out[3] = {0};
   productoEscalar32(test_array_32_in, test_array_32_out, 3, 3);
 
-  uint16_t test_array_16_in[] = {0xFF, 0xFFA, 0xFFFA};
+  uint16_t test_array_16_in[] = {0xFF, 0x1000, 0xFFFA};
   uint16_t test_array_16_out[3] = {0};
   productoEscalar16(test_array_16_in, test_array_16_out, 3, 3);
 
@@ -179,6 +179,17 @@ int main(void)
   test_array_zeros[1] = 2;
   test_array_zeros[2] = 3;
   asm_zeros(test_array_zeros, 3);
+
+  zeros(test_array_32_out, 3);
+  asm_productoEscalar32(test_array_32_in, test_array_32_out, 3, 3);
+
+  test_array_16_out[0] = 0;
+  test_array_16_out[1] = 0;
+  test_array_16_out[2] = 0;
+  asm_productoEscalar16(test_array_16_in, test_array_16_out, 3, 3);
+
+  asm_productoEscalar12(test_array_16_in, test_array_16_out, 3, 3);
+
 
   /* USER CODE END 2 */
 
