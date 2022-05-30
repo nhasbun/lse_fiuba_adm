@@ -8,6 +8,7 @@
 .global asm_zeros
 .global asm_productoEscalar32
 .global asm_productoEscalar16
+.global asm_productoEscalar12
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -115,6 +116,32 @@
 		strh r4, [r1], 2
 		subs r2, 1
 		bne .asm_productoEscalar16_loop
+		bx lr
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut uint32_t longitud, uint16_t escalar);
+@
+@ Parametros recibidos:
+@   r0: *vectorIn
+@   r1: *vectorOut
+@   r2: longitud
+@   r3: escalar
+@
+.thumb_func
+	asm_productoEscalar12:
+		mov r5, 0x0FFF  @ max 4095 value
+	.asm_productoEscalar12_loop:
+		ldrh r4, [r0], 2
+		mul r4, r3
+		cmp r5, r4  @ setting status register flags for r5 - r4
+		bpl .asm_productoEscalar12_capped  @ if result is positive
+		mov r4, r5  @ capping when value is negative (r4 bigger than r5=4095)
+	.asm_productoEscalar12_capped:
+		strh r4, [r1], 2
+		subs r2, 1
+		bne .asm_productoEscalar12_loop
 		bx lr
 
 
