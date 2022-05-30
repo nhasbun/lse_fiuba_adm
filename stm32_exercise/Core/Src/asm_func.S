@@ -7,6 +7,7 @@
 .global asm_sum
 .global asm_zeros
 .global asm_productoEscalar32
+.global asm_productoEscalar16
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -84,6 +85,36 @@
 		str r4, [r1], 4  @ storage
 		subs r2, 1  @ decresing loop index
 		bne .asm_productoEscalar32_loop  @ jmp if loop index r2 > 0 (checking z flag)
+		bx lr
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut uint32_t longitud, uint16_t escalar);
+@
+@ Parametros recibidos:
+@   r0: *vectorIn
+@   r1: *vectorOut
+@   r2: longitud
+@   r3: escalar
+@
+.thumb_func
+	asm_productoEscalar16:
+	.asm_productoEscalar16_loop:
+		@ Nota personal:
+		@ la indicación h de halfword no es necesaria
+		@ al tener arquitectura little endian, los valores relevantes
+		@ en nuestro caso no se solapan
+
+		@ Ej: Al trabajar con 16bits pero con registros de 32b la memoria
+		@ se guarda en este sentido [primeros 8 bits][segundos 8 bits][terceros 8 bits][cuartos 8 bits]
+		@ luego, lo que suceda con el tercer y cuarto grupo de 8 bits no nos interesa :)
+
+		ldrh r4, [r0], 2
+		mul r4, r3
+		strh r4, [r1], 2
+		subs r2, 1
+		bne .asm_productoEscalar16_loop
 		bx lr
 
 
