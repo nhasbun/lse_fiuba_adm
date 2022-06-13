@@ -195,6 +195,9 @@ int main(void)
 
   asm_productoEscalar12(test_array_16_in, test_array_16_out, 3, 3);
 
+  memset(big_array_16_out, 0, sizeof big_array_16_out);
+  asm_filtroVentana10(big_array_16_in, big_array_16_out, 12);
+
 
   /* USER CODE END 2 */
 

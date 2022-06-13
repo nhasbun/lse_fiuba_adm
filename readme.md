@@ -17,4 +17,5 @@ Colección de trabajos prácticos realizados en el contexto de la Carrera de Esp
 ## Referencias:
 
 - [Push and Pop in arm](https://stackoverflow.com/a/27095517/4855501)
+- [Condition Codes 1: Condition Flags and Codes](https://is.gd/EPd61A)
 
