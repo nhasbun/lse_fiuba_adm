@@ -80,12 +80,15 @@
 @
 .thumb_func
 	asm_productoEscalar32:
+	push {r4}
 	.asm_productoEscalar32_loop:
 		ldr r4, [r0], 4  @ load value
 		mul r4, r3  @ multiplication ignoring overflows
 		str r4, [r1], 4  @ storage
 		subs r2, 1  @ decresing loop index
 		bne .asm_productoEscalar32_loop  @ jmp if loop index r2 > 0 (checking z flag)
+
+		pop {r4}
 		bx lr
 
 
@@ -101,6 +104,7 @@
 @
 .thumb_func
 	asm_productoEscalar16:
+	push {r4}
 	.asm_productoEscalar16_loop:
 		@ Nota personal:
 		@ la indicación h de halfword no es necesaria
@@ -116,6 +120,8 @@
 		strh r4, [r1], 2
 		subs r2, 1
 		bne .asm_productoEscalar16_loop
+
+		pop {r4}
 		bx lr
 
 
@@ -131,6 +137,7 @@
 @
 .thumb_func
 	asm_productoEscalar12:
+		push {r4, r5}
 		mov r5, 0x0FFF  @ max 4095 value
 	.asm_productoEscalar12_loop:
 		ldrh r4, [r0], 2
@@ -142,6 +149,8 @@
 		strh r4, [r1], 2
 		subs r2, 1
 		bne .asm_productoEscalar12_loop
+
+		pop {r4, r5}
 		bx lr
 
 
