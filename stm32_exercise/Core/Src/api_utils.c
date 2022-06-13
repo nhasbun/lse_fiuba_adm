@@ -48,3 +48,29 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
 	}
 }
 
+void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn) {
+
+	const uint8_t window_size = 10;
+
+	for (uint8_t i = 0; i < longitudVectorIn; i++) {
+
+		uint32_t sum = 0;
+
+		for (uint8_t j = 0; j < window_size; j++) {
+
+			uint8_t adjusted_index;
+
+			// if remaining elements are less than windows size
+			// we cycle through vectorIn starting from beginning
+			if (j + i < longitudVectorIn) adjusted_index = i + j;
+			else adjusted_index = i + j - longitudVectorIn;
+
+			sum += (uint32_t) *(vectorIn + adjusted_index);
+		}
+
+		*vectorOut = sum / window_size;
+		vectorOut++;
+	}
+}
+
+

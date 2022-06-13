@@ -174,6 +174,11 @@ int main(void)
 
   productoEscalar12(test_array_16_in, test_array_16_out, 3, 3);
 
+  uint16_t big_array_16_in[] = {0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc};
+  uint16_t big_array_16_out[12] = {0};
+
+  filtroVentana10(big_array_16_in, big_array_16_out, 12);
+
   // Testing basic functionality of asm_func methods
   test_array_zeros[0] = 1;
   test_array_zeros[1] = 2;
