@@ -35,5 +35,10 @@ void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t long
  */
 void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn);
 
+/**
+ * Change bit depth of incoming signal vector from 32 to 16bits
+ */
+void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
+
 
 #endif /* INC_API_UTILS_H_ */

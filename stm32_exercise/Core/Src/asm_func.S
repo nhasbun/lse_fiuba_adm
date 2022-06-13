@@ -166,7 +166,7 @@
 @
 .thumb_func
 	asm_filtroVentana10:
-		push {r5-r8}
+		push {r5-r7}
 		mov r3, 10  @ filter windows size stored in r3
 		mov r4, 0  @ main array start element index (number go from 0 to longitudVIN - 1)
 
@@ -192,7 +192,7 @@
 		cmp r4, r2
 		bne .asm_filtroVentana10_element_loop
 
-		pop {r5-r8}
+		pop {r5-r7}
 		bx lr
 
 

@@ -179,6 +179,17 @@ int main(void)
 
   filtroVentana10(big_array_16_in, big_array_16_out, 12);
 
+  int32_t signed_big_array_32_in[] = {
+		  0xFFFFAAAA,
+		  0xFAFA1212,
+		  0x00112233,
+		  0x12345678,
+  };
+
+  int16_t signed_big_array_16_out[4] = {0};
+
+  pack32to16(signed_big_array_32_in, signed_big_array_16_out, 4);
+
   // Testing basic functionality of asm_func methods
   test_array_zeros[0] = 1;
   test_array_zeros[1] = 2;
