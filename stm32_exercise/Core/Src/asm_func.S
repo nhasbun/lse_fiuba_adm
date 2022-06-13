@@ -10,6 +10,7 @@
 .global asm_productoEscalar16
 .global asm_productoEscalar12
 .global asm_filtroVentana10
+.global asm_pack32to16
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -194,6 +195,34 @@
 
 		pop {r5-r7}
 		bx lr
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: *vectorIn
+@   r1: *vectorOut
+@   r2: longitud
+@
+.thumb_func
+asm_pack32to16:
+	.asm_pack32to16_loop:
+
+		cmp r2, 0  @ checking if longitud > 0
+		ble .asm_pack32to16_exit
+
+		ldr r3, [r0], 4
+		lsr r3, 16
+		strh r3, [r1], 2
+
+		sub r2, 1  @ decrementing longitud
+
+		b .asm_pack32to16_loop
+
+	.asm_pack32to16_exit:
+		bx lr
+
 
 
 

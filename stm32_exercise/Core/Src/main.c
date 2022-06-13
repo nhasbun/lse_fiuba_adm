@@ -160,7 +160,10 @@ int main(void)
 
   const uint32_t Resultado = asm_sum (5, 3);
 
-  // Testing basic functionality of api_utils methods
+  /**
+   * Testing basic functionality of api_utils methods
+   */
+
   uint32_t test_array_zeros[] = {1, 2, 3};
   zeros(test_array_zeros, 3);
 
@@ -190,7 +193,10 @@ int main(void)
 
   pack32to16(signed_big_array_32_in, signed_big_array_16_out, 4);
 
-  // Testing basic functionality of asm_func methods
+  /**
+   * Testing basic functionality of asm_func methods
+   */
+
   test_array_zeros[0] = 1;
   test_array_zeros[1] = 2;
   test_array_zeros[2] = 3;
@@ -208,6 +214,9 @@ int main(void)
 
   memset(big_array_16_out, 0, sizeof big_array_16_out);
   asm_filtroVentana10(big_array_16_in, big_array_16_out, 12);
+
+  memset(signed_big_array_16_out, 0, sizeof signed_big_array_16_out);
+  asm_pack32to16(signed_big_array_32_in, signed_big_array_16_out, 4);
 
 
   /* USER CODE END 2 */
