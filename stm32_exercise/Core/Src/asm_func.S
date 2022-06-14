@@ -12,6 +12,7 @@
 .global asm_filtroVentana10
 .global asm_pack32to16
 .global asm_max
+.global asm_downsampleM
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -256,7 +257,41 @@ asm_max:
 		mov r0, r2
 		bx lr
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
+@
+@ Parametros recibidos:
+@   r0: *vectorIn
+@   r1: *vectorOut
+@	r2: longitud
+@	r3: N (samples are eliminated every N elements)
+@
+.thumb_func
+asm_downsampleM:
 
+	push {r4-r5}
+	mov r4, 0  @ stored element counter
+
+	.asm_downsample_loop:
+
+		 cmp r2, 0  @ checking if longitud > 0
+		 ble .asm_downsample_exit
+
+		 add r4, 1
+		 ldr r5, [r0], 4  @ storing vectorIN values in r5
+
+		 cmp r4, r3
+		 ite lt  @ if element counter - N is negative
+		 strlt r5, [r1], 4
+		 movge r4, 0
+
+		 sub r2, 1  @ decrementing remaining elements
+		 b .asm_downsample_loop
+
+	.asm_downsample_exit:
+		pop {r4 - r5}
+		bx lr
 
 
 

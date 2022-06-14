@@ -231,6 +231,9 @@ int main(void)
   max_number = 0;
   max_number = asm_max(signed_big_array_32_in, 4);
 
+  memset(downsample_output, 0, sizeof downsample_output);
+  asm_downsampleM(downsample_input, downsample_output, 12, 3);
+
 
   /* USER CODE END 2 */
 
