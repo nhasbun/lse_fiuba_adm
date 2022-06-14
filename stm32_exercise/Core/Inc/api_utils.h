@@ -50,5 +50,10 @@ int32_t max (int32_t * vectorIn, uint32_t longitud);
  */
 void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
 
+/**
+ * Reversing array
+ */
+void invertir (uint16_t * vector, uint32_t longitud);
+
 
 #endif /* INC_API_UTILS_H_ */

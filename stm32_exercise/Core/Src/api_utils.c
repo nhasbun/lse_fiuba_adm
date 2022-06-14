@@ -116,4 +116,20 @@ void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, ui
 	}
 }
 
+void invertir (uint16_t * vector, uint32_t longitud) {
+
+	uint16_t * last_element = vector + longitud - 1;
+	uint32_t iterations = longitud / 2;
+
+	for (; iterations > 0; iterations--) {
+
+		uint16_t temp = *(last_element);
+		*(last_element) = *(vector);
+		*(vector) = temp;
+
+		vector++;
+		last_element--;
+	}
+}
+
 

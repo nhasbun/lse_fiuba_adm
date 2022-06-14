@@ -203,6 +203,8 @@ int main(void)
 
   downsampleM(downsample_input, downsample_output, 12, 3);
 
+  invertir(big_array_16_in, 12);
+
   /**
    * Testing basic functionality of asm_func methods
    */
