@@ -14,6 +14,7 @@
 .global asm_max
 .global asm_downsampleM
 .global asm_invertir
+.global asm_corr
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -330,3 +331,67 @@ asm_invertir:
 
 		pop {r4 - r6}
 		bx lr
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_corr (int16_t *vectorX, int16_t * vectorY, int32_t * vectorCorr, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: *vectorX
+@   r1: *vectorY
+@   r2: *vectorCorr
+@   r3: longitud
+@
+.thumb_func
+asm_corr:
+
+	 push {r4 - r11}
+	 mov r4, 0  @ foreach element counter i
+	 @   r5, 0  @ foreach overlapping element counter j
+	 @   r6, 0  @ temp sum holder
+
+	 .asm_corr_loop:
+	 @ foreach element loop
+
+	 	cmp r4, r3
+	 	bge .asm_corr_exit
+
+	 	mov r5, 0
+	 	mov r6, 0
+	 	sub r7, r3, r4  @ longitud - i
+
+	 	.asm_corr_loop_overlapping:
+
+	 		cmp r5, r7
+	 		bge .asm_corr_exit_overlapping_loop
+
+	 		lsl r8, r5, 1  @ address offset for memory lookup
+
+	 		ldrsh r9, [r0, r8]  @ vector x + j pointer  ** using signed halfword
+	 		ldrsh r10, [r1, r8]  @ vector y + j pointer
+
+	 		mul r11, r9, r10
+	 		add r6, r11
+
+	 		add r5, 1  @ increasing j
+	 		b .asm_corr_loop_overlapping
+
+ 	.asm_corr_exit_overlapping_loop:
+
+ 		str r6, [r2], 4
+ 		add r0, 2  @ increasing vector x pointer
+ 		add r4, #1  @ increasing i
+ 		b .asm_corr_loop
+
+	.asm_corr_exit:
+
+		pop {r4 -r11}
+		bx lr
+
+
+
+
+
+
+

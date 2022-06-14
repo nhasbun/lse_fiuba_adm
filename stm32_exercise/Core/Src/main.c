@@ -245,6 +245,8 @@ int main(void)
 
   asm_invertir(big_array_16_in, 12);
 
+  memset(vector_corr, 0, sizeof vector_corr);
+  asm_corr(vector_x, vector_y, vector_corr, 4);
 
   /* USER CODE END 2 */
 
