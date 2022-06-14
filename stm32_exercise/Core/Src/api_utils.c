@@ -83,4 +83,17 @@ void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud) {
 
 }
 
+int32_t max (int32_t * vectorIn, uint32_t longitud) {
+
+	int32_t max_number = 0x80000000;  // smaller 32bit signed number
+
+	for (; longitud > 0; longitud--) {
+
+		if (*vectorIn > max_number) max_number = *vectorIn;
+		vectorIn++;
+	}
+
+	return max_number;
+}
+
 

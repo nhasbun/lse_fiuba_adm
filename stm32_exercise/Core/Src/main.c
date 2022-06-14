@@ -193,6 +193,9 @@ int main(void)
 
   pack32to16(signed_big_array_32_in, signed_big_array_16_out, 4);
 
+  int32_t max_number = max(signed_big_array_32_in, 4);
+  if (max_number);
+
   /**
    * Testing basic functionality of asm_func methods
    */

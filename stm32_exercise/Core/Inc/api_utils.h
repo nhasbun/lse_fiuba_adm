@@ -40,5 +40,10 @@ void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitu
  */
 void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
 
+/**
+ * Find max number in array
+ */
+int32_t max (int32_t * vectorIn, uint32_t longitud);
+
 
 #endif /* INC_API_UTILS_H_ */
