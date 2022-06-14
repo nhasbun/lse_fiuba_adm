@@ -196,6 +196,13 @@ int main(void)
   int32_t max_number = max(signed_big_array_32_in, 4);
   if (max_number);
 
+  int32_t downsample_input[] = {
+		  0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc
+  };
+  int32_t downsample_output[8] = {0};
+
+  downsampleM(downsample_input, downsample_output, 12, 3);
+
   /**
    * Testing basic functionality of asm_func methods
    */

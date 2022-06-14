@@ -96,4 +96,24 @@ int32_t max (int32_t * vectorIn, uint32_t longitud) {
 	return max_number;
 }
 
+void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N) {
+
+	uint16_t element_count = 0;
+
+	for (; longitud > 0; longitud--) {
+
+		element_count++;
+
+		if (element_count < N) {
+			*vectorOut = *vectorIn;
+			vectorOut++;
+
+		} else {
+			element_count = 0;
+		}
+
+		vectorIn++;
+	}
+}
+
 

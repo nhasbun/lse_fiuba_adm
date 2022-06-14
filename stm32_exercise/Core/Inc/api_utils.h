@@ -45,5 +45,10 @@ void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
  */
 int32_t max (int32_t * vectorIn, uint32_t longitud);
 
+/**
+ * Downsampling signal. Discarding 1 of N samples.
+ */
+void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
+
 
 #endif /* INC_API_UTILS_H_ */
