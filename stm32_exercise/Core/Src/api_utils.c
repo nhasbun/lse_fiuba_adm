@@ -132,7 +132,7 @@ void invertir (uint16_t * vector, uint32_t longitud) {
 	}
 }
 
-void corr (int16_t *vectorX, int16_t * vectorY, int16_t * vectorCorr, uint32_t longitud) {
+void corr (int16_t *vectorX, int16_t * vectorY, int32_t * vectorCorr, uint32_t longitud) {
 
 	/**
 	 * Following this diagrams was pretty helpful:

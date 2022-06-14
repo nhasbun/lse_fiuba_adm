@@ -208,7 +208,7 @@ int main(void)
 
   int16_t vector_x[] = {1, 2, 3, 4};
   int16_t vector_y[] = {-1, -2, -3, -4};
-  int16_t vector_corr[4] = {0};
+  int32_t vector_corr[4] = {0};
 
   corr(vector_x, vector_y, vector_corr, 4);
 
