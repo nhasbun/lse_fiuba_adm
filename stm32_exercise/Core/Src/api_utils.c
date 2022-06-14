@@ -132,4 +132,27 @@ void invertir (uint16_t * vector, uint32_t longitud) {
 	}
 }
 
+void corr (int16_t *vectorX, int16_t * vectorY, int16_t * vectorCorr, uint32_t longitud) {
+
+	/**
+	 * Following this diagrams was pretty helpful:
+	 * - https://www.allaboutcircuits.com/technical-articles/understanding-correlation/
+	 */
+
+	for (uint32_t i = 0; i < longitud; i++) {
+
+		int16_t sum = 0;
+
+		for (uint32_t j = 0; j < longitud - i; j++) {
+
+			int16_t first_item = *(vectorX + j);
+			int16_t second_item = *(vectorY + j);
+			sum += first_item * second_item;
+		}
+
+		*(vectorCorr + i) = sum;
+		vectorX += 1;
+	}
+}
+
 

@@ -206,6 +206,12 @@ int main(void)
   invertir(big_array_16_in, 12);
   invertir(big_array_16_in, 12);
 
+  int16_t vector_x[] = {1, 2, 3, 4};
+  int16_t vector_y[] = {-1, -2, -3, -4};
+  int16_t vector_corr[4] = {0};
+
+  corr(vector_x, vector_y, vector_corr, 4);
+
   /**
    * Testing basic functionality of asm_func methods
    */
