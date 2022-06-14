@@ -137,3 +137,16 @@ Un ejemplo de esto es un simple suma para un número entero sin signo de 8 bits:
 * Sumando un valor 2:
    * De forma tradicional toma un valor de 0 (o en binario 0000_0000)
    * Con aritmética saturada limitando su valor al máximo representable queda en 255.
+
+4. **Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?**
+
+La interfaz está definida en los documentos de ARM Prodecure Call Standard (APCS).
+
+En particular las funciones reciben argumentos en los registros **r0** a **r3** y los valores
+de retorno de las funciones se hacen en el registro **r0**.
+
+Todos los otros registros desde **r4** a **r12** pertenecen al contexto de la función previa
+que llama a la función actual. Esto significa en la práctica que antes de ser utilizados
+sus valores deben respaldarse en la pila (haciendo uso de `push {rx}`). Del mismo modo, antes
+de terminar la ejecución de la función actual el contexto para la función previa debe retornarse
+sacando los elementos almacenados en la pila (haciendo uso de `pop {rx}`).
