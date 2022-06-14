@@ -221,6 +221,9 @@ int main(void)
   memset(signed_big_array_16_out, 0, sizeof signed_big_array_16_out);
   asm_pack32to16(signed_big_array_32_in, signed_big_array_16_out, 4);
 
+  max_number = 0;
+  max_number = asm_max(signed_big_array_32_in, 4);
+
 
   /* USER CODE END 2 */
 

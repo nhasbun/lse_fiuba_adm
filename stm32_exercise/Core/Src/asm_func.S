@@ -11,6 +11,7 @@
 .global asm_productoEscalar12
 .global asm_filtroVentana10
 .global asm_pack32to16
+.global asm_max
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -221,6 +222,38 @@ asm_pack32to16:
 		b .asm_pack32to16_loop
 
 	.asm_pack32to16_exit:
+		bx lr
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   int32_t asm_max (int32_t * vectorIn, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: *vectorIn
+@   r1: longitud
+@
+.thumb_func
+asm_max:
+
+	mov r2, 0  @ 2 steps loading 32 bit number
+	movt r2, 0x8000  @ minimal possible 32 bit 2 complements value
+
+	.asm_max_loop:
+
+		cmp r1, 0  @ checking if longitud > 0
+		ble .asm_max_exit
+
+		ldr r3, [r0], 4  @ dereferencing pointer
+
+		cmp r3, r2  @ comparing actual value to previous max value
+		it gt  @ if greater then we update max value
+		movgt r2, r3
+
+		sub r1, 1
+		b .asm_max_loop
+
+	.asm_max_exit:
+		mov r0, r2
 		bx lr
 
 
