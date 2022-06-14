@@ -249,7 +249,8 @@ int main(void)
   asm_corr(vector_x, vector_y, vector_corr, 4);
 
   memset(vector_corr, 0, sizeof vector_corr);
-  asm_corr_simd(vector_x, vector_y, vector_corr, 4);
+  int16_t vector_x_filled[] = {1, 2, 3, 4, 0};  // adjusted vector x for simd optimization
+  asm_corr_simd(vector_x_filled, vector_y, vector_corr, 4);
 
   /* USER CODE END 2 */
 

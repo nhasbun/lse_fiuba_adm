@@ -395,6 +395,8 @@ asm_corr:
 @ Prototipo en "C":
 @   void asm_corr_simd (int16_t *vectorX, int16_t * vectorY, int32_t * vectorCorr, uint32_t longitud);
 @
+@ For asm_corr_simd usage: vectorx must have an extra zero element at the end
+@
 @ Parametros recibidos:
 @   r0: *vectorX
 @   r1: *vectorY
@@ -421,33 +423,17 @@ asm_corr_simd:
 
 	 	.asm_corr_simd_loop_overlapping:
 
-	 		cmp r5, r7
+	 		cmp r5, r7  @ j cant be bigger than overlapping elements
 	 		bge .asm_corr_simd_exit_overlapping_loop
 
 	 		lsl r8, r5, 1  @ address offset for memory lookup
-
-	 		add r11, r5, 1
-	 		cmp r11, r7  @ special case for only 1 overlapping element
-	 		beq .asm_corr_regular_branch
-
-	 		.asm_corr_simd_branch:
 
 		 		ldr r9, [r0, r8]  @ vector x + j pointer
 		 		ldr r10, [r1, r8]  @ vector y + j pointer
 
 		 		smuad r9, r9, r10  @ simd result storage at r9
-		 		b .asm_corr_simd_branch_continue
-
-		 	.asm_corr_regular_branch:
-
-		 		ldrsh r9, [r0, r8]  @ vector x + j pointer  ** using signed halfword
-	 			ldrsh r10, [r1, r8]  @ vector y + j pointer
-
-	 			mul r9, r10
-
-	 		.asm_corr_simd_branch_continue:
-
  			add r6, r9
+
 	 		add r5, 2  @ increasing j by 2 since simd instruction are extracting 2 elements at once
 	 		b .asm_corr_simd_loop_overlapping
 
