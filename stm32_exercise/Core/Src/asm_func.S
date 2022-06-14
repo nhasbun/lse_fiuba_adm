@@ -13,6 +13,7 @@
 .global asm_pack32to16
 .global asm_max
 .global asm_downsampleM
+.global asm_invertir
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -294,13 +295,38 @@ asm_downsampleM:
 		bx lr
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_invertir (uint16_t * vector, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: *vector
+@   r1: longitud
+@
+.thumb_func
+asm_invertir:
 
+	push {r4 - r6}
+	sub r2, r1, 1
+	lsl r2, 1
+	add r2, r0  @ last element pointer at r2
+	lsr r3, r1, 1  @ iterations number at r3
 
+	.asm_invertir_loop:
 
+		cmp r3, 0
+		ble .asm_invertir_exit
 
+		ldrh r5, [r0]  @ temp variable for *vector
+		ldrh r6, [r2]  @ temp variable for *last_element
 
+		strh r6, [r0], 2  @ storing what vector had on last_element
+		strh r5, [r2], -2  @ storing what last element had on vector slot
 
+		sub r3, 1
+		b .asm_invertir_loop
 
+	.asm_invertir_exit:
 
-
-
+		pop {r4 - r6}
+		bx lr

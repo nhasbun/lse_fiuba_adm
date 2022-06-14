@@ -204,6 +204,7 @@ int main(void)
   downsampleM(downsample_input, downsample_output, 12, 3);
 
   invertir(big_array_16_in, 12);
+  invertir(big_array_16_in, 12);
 
   /**
    * Testing basic functionality of asm_func methods
@@ -235,6 +236,8 @@ int main(void)
 
   memset(downsample_output, 0, sizeof downsample_output);
   asm_downsampleM(downsample_input, downsample_output, 12, 3);
+
+  asm_invertir(big_array_16_in, 12);
 
 
   /* USER CODE END 2 */
