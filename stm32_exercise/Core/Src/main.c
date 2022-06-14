@@ -248,6 +248,9 @@ int main(void)
   memset(vector_corr, 0, sizeof vector_corr);
   asm_corr(vector_x, vector_y, vector_corr, 4);
 
+  memset(vector_corr, 0, sizeof vector_corr);
+  asm_corr_simd(vector_x, vector_y, vector_corr, 4);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
