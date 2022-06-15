@@ -54,6 +54,8 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 
+char uart_buf[80];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -147,7 +149,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  DWT->CTRL |= 1 << DWT_CTRL_CYCCNTENA_Pos;
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -158,7 +160,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   PrivilegiosSVC ();
 
+  HAL_UART_Transmit(&huart3, "Starting...\r\n", 14, 1000);
+
+  DWT->CYCCNT = 0;
   const uint32_t Resultado = asm_sum (5, 3);
+  volatile uint32_t cicles = DWT->CYCCNT;
 
   /**
    * Testing basic functionality of api_utils methods
@@ -210,7 +216,11 @@ int main(void)
   int16_t vector_y[] = {-1, -2, -3, -4};
   int32_t vector_corr[4] = {0};
 
+  DWT->CYCCNT = 0;
   corr(vector_x, vector_y, vector_corr, 4);
+  cicles = DWT->CYCCNT;
+  sprintf(uart_buf, "Corr cicles: %u \r\n", cicles);
+  HAL_UART_Transmit(&huart3, uart_buf, strlen(uart_buf), 1000);
 
   /**
    * Testing basic functionality of asm_func methods
@@ -246,11 +256,19 @@ int main(void)
   asm_invertir(big_array_16_in, 12);
 
   memset(vector_corr, 0, sizeof vector_corr);
+  DWT->CYCCNT = 0;
   asm_corr(vector_x, vector_y, vector_corr, 4);
+  cicles = DWT->CYCCNT;
+  sprintf(uart_buf, "asm_corr cicles: %u \r\n", cicles);
+  HAL_UART_Transmit(&huart3, uart_buf, strlen(uart_buf), 1000);
 
   memset(vector_corr, 0, sizeof vector_corr);
   int16_t vector_x_filled[] = {1, 2, 3, 4, 0};  // adjusted vector x for simd optimization
+  DWT->CYCCNT = 0;
   asm_corr_simd(vector_x_filled, vector_y, vector_corr, 4);
+  cicles = DWT->CYCCNT;
+  sprintf(uart_buf, "asm_cirr_simd cicles: %u \r\n", cicles);
+  HAL_UART_Transmit(&huart3, uart_buf, strlen(uart_buf), 1000);
 
   /* USER CODE END 2 */
 
