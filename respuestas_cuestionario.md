@@ -126,6 +126,22 @@ Permite definir y controlar el acceso a regiones de memoria asignadas a distinto
 
 ## ISA
 
+2. **¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo**
+
+Se utiliza para actualizar los flags condicionales de acuerdo al resultado de una
+instrucción. Estos flags pueden ser: N resultado negativo, Z resultado es cero,
+C sucedió un unsigned overflow o V sucedió un signed overflow.
+
+Estos luego se utilizan para realizar operaciones condicionales del tipo igual,
+no igual, mayor, menor, etc. Un ejemplo de esto se ve para la operación de resta:
+
+```
+subs r1, r2
+bne .some_other_place
+```
+
+Acá el salto se ignora cuando r1 es igual a r2.
+
 3. **¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.**
 
 Estas instrucciones permiten establecer máximos y minimos para operaciones aritméticas. Tradicionalmente las operaciones
