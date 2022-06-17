@@ -126,9 +126,22 @@ Permite definir y controlar el acceso a regiones de memoria asignadas a distinto
 
 ## ISA
 
+1. **¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo**
+
+Son extensiones opcionales que se pueden agregar en el lenguaje ensamblador para
+generar variantes a las instrucciones base del procesador.
+
+De este modo se tiene un set de instrucciones base RISC pero que tiene una gran
+cantidad ve opciones y variantes.
+
+Un ejemplo de esto se ve para la instrucción ADD:
+
+* ADD{s}\<c>: Agregar **s** actualiza status register. \<c> corresponde a ejecuciones
+  condicionales del tipo EQ, NE, MI, PL, etc.
+
 2. **¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo**
 
-Se utiliza para actualizar los flags condicionales de acuerdo al resultado de una
+Se utiliza para actualizar los valores del **status register** (APSR) de acuerdo al resultado de una
 instrucción. Estos flags pueden ser: N resultado negativo, Z resultado es cero,
 C sucedió un unsigned overflow o V sucedió un signed overflow.
 
