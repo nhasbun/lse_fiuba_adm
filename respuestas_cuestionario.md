@@ -150,3 +150,24 @@ que llama a la función actual. Esto significa en la práctica que antes de ser 
 sus valores deben respaldarse en la pila (haciendo uso de `push {rx}`). Del mismo modo, antes
 de terminar la ejecución de la función actual el contexto para la función previa debe retornarse
 sacando los elementos almacenados en la pila (haciendo uso de `pop {rx}`).
+
+5. **¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo**
+
+Permite hacer múltiples cálculos a través de una sola instrucción.
+
+Es útil en procesamiento de señales análogas continuas como puede ser el caso de audio, video, u otro tipo de señales discretizadas. Permite en una sola intrucción ejecutar hasta 4 cálculos acelerando de forma importante el procesamiento de datos.
+
+Ejemplo:
+
+La instrucción SMUAD permite hacer la suma del resultado de 2 multplicaciones de
+números de 16 bits en una sola instrucción.
+
+```
+r1 = [a] [b]
+r2 = [c] [d]
+
+smuad r0, r1, r2
+
+r0 = a*c + b*d
+```
+
