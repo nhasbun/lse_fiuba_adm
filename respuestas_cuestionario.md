@@ -112,6 +112,12 @@ entre distintas versiones de microcontroladores. Un ejemplo de esto es el paquet
 una interfaz unificada para programar todos los microcontroladores de la gama Cortex-M (un paquete similar CMSIS-Core(A)
 existe para los procesadores de la gama Cortex-A).
 
+16. **Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival**
+
+**Tail-chaining** permite continuar en el "modo interrupción" (handler mode) sin necesidad hacer operaciones para restaurar el contexto de trabajo del modo regular de trabajo (thread mode). Esto sucede cuando hay más de una interrupción pendiente de atención. Luego de terminar una, se pasa inmediatamente a la otra sin operaciones costosas de cambio de contexto.
+
+**Late arrival** permite que una interrupción de prioridad alta se ejecute antes que una de prioridad más baja aún cuando llega después. La tarea de prioridad baja acciona la entrada al modo handler y el proceso de stacking, pero esto toma un tiempo en donde se permite la entrada de una interrupción de prioridad mayor. Luego, si la tarea de prioridad mayor logra entrar antes de que el proceso de cambio de contexto termine, es la que se ejecuta en primera instancia.
+
 17. **¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?**
 
 Es una interrupción constante generada por un timer en el procesador usualmente cada 1ms. Esto permite llevar medida del tiempo transcurrido pero también permite asociar tareas a esta interrupción de **systick**.
