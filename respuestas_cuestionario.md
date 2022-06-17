@@ -102,6 +102,15 @@ conditional jump (EX) -->
    aún en los registros de propósito general.
 ```
 
+11. **Describa la secuencia de reset del microprocesador**
+
+Luego de un reset se tienen dos operaciones inmediatas: valor inicial para el Main Stack Pointer y la dirección
+de memoria para la función que maneja el reset (reset handler).
+
+El MSP se carga pues es necesario para operar la captura de algunas excepciones que pueden ocurrir de forma temprana.
+Luego de eso se pasa al reset handler que indica el inicio de la operación del procesador y a las subsecuentes instrucciones
+que sigan en el programa.
+
 14. **¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?**
 
 Es una capa de abstracción entregada por ARM a los fabricantes finales de los microcontroladores para su configuración,
